@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LizardStep1</title>
+  <style>
+    body {
+      margin: 0;
+      background: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+   }
+
+      .main-image {
+      max-width: 80%;
+      height: auto;
+    }
+
+    .top-right-button {
+      position: absolute;
+      top: 150px;
+      right: 30px;
+      cursor: pointer;
+      width: 100px;
+      height: 100px;
+    }
+
+    .bottom-right-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 100px;
+      height: auto;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Lizard audio -->
+  <audio id="lizard-audio" src="ohlooklizard.mp3"></audio>
+
+  <!-- GLaDOS audios -->
+  <audio id="glados-audio1" src="gladoshelp1.mp3"></audio>
+  <audio id="glados-audio2" src="gladoshelp2.mp3"></audio>
+  <audio id="glados-audio3" src="gladoshelp3.mp3"></audio>
+
+  <!-- Top-right Lizard button -->
+  <img 
+    id="lizard-button"
+    src="lizard.jpg"
+    alt="Lizard Button"
+    class="top-right-button"
+    onclick="document.getElementById('lizard-audio').play()" 
+  />
+
+  <!-- Bottom-right GLaDOS button -->
+  <img 
+    id="glados-button"
+    src="gladosbutton.jpg"
+    alt="GLaDOS Help"
+    class="bottom-right-button"
+    onclick="toggleGladosAudio()"
+  />
+
+ <!-- Main image in center -->
+  <img src="aurora.jpg" alt="Main Image" class="main-image">
+
+ <!-- Scripts -->
+  <script>
+// GLaDOS toggle
+let gladosAudioIndex = 0;
+function toggleGladosAudio() {
+  const audios = [
+    document.getElementById("glados-audio1"),
+    document.getElementById("glados-audio2"),
+    document.getElementById("glados-audio3")
+  ];
+
+  // Stop all
+  audios.forEach(audio => {
+    audio.pause();
+    audio.currentTime = 0;
+  });
+
+  // Play current
+  audios[gladosAudioIndex].play();
+
+  // Move to next (loop back to 0 after 2)
+  gladosAudioIndex = (gladosAudioIndex + 1) % audios.length;
+}
+
+  </script>
+
+</body>
+</html>
